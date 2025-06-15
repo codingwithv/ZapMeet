@@ -29,7 +29,7 @@ const LoginPage = () => {
   };
 
   const handleGoogleLogin = () => {
-    window.location.href = "http://localhost:5001/api/oauth/google";
+    window.location.href = "https://zapmeet.onrender.com/api/oauth/google";
   };
 
   return (
