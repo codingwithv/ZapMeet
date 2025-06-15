@@ -9,12 +9,13 @@ const userSchema = new mongoose.Schema(
     },
     email: {
       type: String,
-      required: true,
       unique: true,
     },
     password: {
       type: String,
-      required: true,
+      required: function () {
+        return !this.googleId;
+      },
       minlength: 6,
     },
     bio: {
@@ -32,6 +33,11 @@ const userSchema = new mongoose.Schema(
     learningLanguage: {
       type: String,
       default: "",
+    },
+    googleId: {
+      type: String,
+      unique: true,
+      sparse: true,
     },
     location: {
       type: String,
@@ -64,7 +70,10 @@ userSchema.pre("save", async function (next) {
 });
 
 userSchema.methods.matchPassword = async function (enteredPassword) {
-  const isPasswordCorrect = await bcrypt.compare(enteredPassword, this.password);
+  const isPasswordCorrect = await bcrypt.compare(
+    enteredPassword,
+    this.password
+  );
   return isPasswordCorrect;
 };
 
