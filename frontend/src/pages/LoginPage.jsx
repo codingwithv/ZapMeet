@@ -29,7 +29,8 @@ const LoginPage = () => {
   };
 
   const handleGoogleLogin = () => {
-    window.location.href = "https://zapmeet.onrender.com/api/oauth/google";
+    window.location.href =
+      "https://zapmeet.onrender.com/api/oauth/google/callback";
   };
 
   return (
